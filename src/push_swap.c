@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:54:24 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/06 20:35:10 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/07 15:21:15 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int main(int argc, char **argv)
 	
 	a = NULL;
 	b = NULL;
-	if (!parsing(argc, argv, &a))
-		handle_error(argc, a);
+	if (parsing(argc, argv, &a));
 }
 
 void	handle_error(char **args, t_stack **a, int should_free_split)
@@ -44,7 +43,7 @@ void	handle_error(char **args, t_stack **a, int should_free_split)
 	exit(-1);
 }
 
-int parsing(int argc, char **argv, t_stack **a)
+void parsing(int argc, char **argv, t_stack **a)
 {
 	char **splitted_args;
 
@@ -52,9 +51,12 @@ int parsing(int argc, char **argv, t_stack **a)
 	{
 		splitted_args = ft_split(argv[1], ' ');
 		if (!splitted_args)
-			handle_error(splitted_args, a, 1);
-		if (!splitted_args[1][0])
-			handle_error(splitted_args, a, 1);
+			handle_error(NULL, a, 0);
+		if (!splitted_args[0] || !splitted_args[0][0])
+		{
+			free_split(splitted_args);
+			handle_error(NULL, a, 0);
+		}
 	}
 	else
 		splitted_args = argv + 1;
@@ -62,7 +64,6 @@ int parsing(int argc, char **argv, t_stack **a)
 		handle_error(NULL, a, 0);
 	if (2 == argc)
 		free_split(splitted_args);
-	return (1);
 }
 
 void	free_split(char **args)
