@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:49:55 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/09 17:52:44 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/10 15:54:10 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,21 @@ void rotate(t_stack **stack)
 	ft_lstadd_back_ps(stack, temp); 
 }
 
+void ra (t_stack **a)
+{
+	rotate(a);
+	ft_printf("ra\n");	
+}
+
+void rb(t_stack **b)
+{
+	rotate(b);
+	ft_printf("rb\n");
+}
+
+void rr(t_stack **a, t_stack **b)
+{
+	rotate(a);
+ 	rotate(b);
+ 	ft_printf("rr\n");
+ }

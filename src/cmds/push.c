@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 18:00:50 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/08 18:09:11 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:01:02 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void push(t_stack **src, t_stack **dest)
 {
-    t_stack *tmp;
+    t_stack *temp;
 
     if (!src || !*src)
         return ;
-    tmp = *src;
+    temp = *src;
     *src = (*src)->next;
-    tmp->next = *dest;
+    temp->next = *dest;
     *dest = temp;
 }
 
