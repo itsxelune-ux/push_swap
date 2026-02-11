@@ -6,7 +6,7 @@
 #    By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/23 02:34:49 by vlnikola          #+#    #+#              #
-#    Updated: 2026/02/06 18:53:37 by omitrovs         ###   ########.fr        #
+#    Updated: 2026/02/11 20:21:08 by omitrovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,19 @@ CFLAGS      = -Wall -Wextra -Werror
 LIBFT_PATH  = ./libft
 LIBFT_NAME  = $(LIBFT_PATH)/libft.a
 
-SRCS        = 
+SRCS        = src/cmds/push.c \
+			src/cmds/reverse_rotate.c \
+			src/cmds/rotate.c \
+			src/cmds/swap.c \
+			src/sort/sort_move_node.c \
+			src/sort/sort_rotations.c \
+			src/sort/sort_small.c \
+			src/sort/sort_utils.c \
+			src/sort/sort.c \
+			src/list.c \
+			src/parsing.c \
+			src/push_swap.c \
+			src/utils.c
 
 OBJS        = $(SRCS:.c=.o)
 

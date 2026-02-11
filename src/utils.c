@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:55:03 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/06 19:58:41 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:31:00 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,37 @@ int	ft_atol_safe(const char *str, long *result)
 	return (1);
 }
 
-number = ft_atol_safe()
-!ft_atol_safe()
+int is_sorted(t_stack *a)
+{
+	while(a)
+	{
+		if ((a)->content > (a)->next->content)
+			return (0);
+		a = a->next;
+	}
+	return (1);
+}
+
+int	abs_v(int num)
+{
+	if (num < 0)
+		return (num * (-1));
+	return (num);
+}
+
+void	free_stack(t_stack **stack)
+{
+	t_stack	*tmp;
+	t_stack	*current;
+
+	if (!stack || !*stack)
+		return ;
+	current = *stack;
+	while (current)
+	{
+		tmp = current->next;
+		free(current);
+		current = tmp;
+	}
+	*stack = NULL;
+}

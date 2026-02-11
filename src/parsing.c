@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 17:10:10 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/10 17:10:28 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:32:05 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,14 @@ void	handle_error(char **args, t_stack **a, int should_free_split)
 	ft_putstr_fd("Error\n", 2);
 	if (should_free_split && a)
 	{
-		free_split();
-		free_stack();
+		free_split(args);
+		free_stack(a);
 	}
 	if (a || *a)
 	{
-		free_stack();	
+		free_stack(a);	
 	}
 	exit(-1);
-}
-
-void parsing(int argc, char **argv, t_stack **a)
-{
-	char **splitted_args;
-
-	if (2 == argc)
-	{
-		splitted_args = ft_split(argv[1], ' ');
-		if (!splitted_args)
-			handle_error(NULL, a, 0);
-		if (!splitted_args[0] || !splitted_args[0][0])
-		{
-			free_split(splitted_args);
-			handle_error(NULL, a, 0);
-		}
-	}
-	else
-		splitted_args = argv + 1;
-	if (!validate_args(splitted_args, a))
-		handle_error(NULL, a, 0);
-	if (2 == argc)
-		free_split(splitted_args);
 }
 
 void	free_split(char **args)
@@ -75,7 +52,7 @@ int is_duplicate(t_stack *a, int num)
 
 int validate_args(char **args, t_stack **a)
 {
-	long *number;
+	long number;
 	while (*args)
 	{
 		if (!ft_atol_safe(*args, &number))
@@ -86,4 +63,27 @@ int validate_args(char **args, t_stack **a)
 		args++;	
 	}
 	return (1);
+}
+
+void parsing(int argc, char **argv, t_stack **a)
+{
+	char **splitted_args;
+
+	if (2 == argc)
+	{
+		splitted_args = ft_split(argv[1], ' ');
+		if (!splitted_args)
+			handle_error(NULL, a, 0);
+		if (!splitted_args[0] || !splitted_args[0][0])
+		{
+			free_split(splitted_args);
+			handle_error(NULL, a, 0);
+		}
+	}
+	else
+		splitted_args = argv + 1;
+	if (!validate_args(splitted_args, a))
+		handle_error(NULL, a, 0);
+	if (2 == argc)
+		free_split(splitted_args);
 }

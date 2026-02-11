@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 18:01:09 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/10 18:27:48 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:14:37 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void assign_index(t_stack *stack)
 	{
 		stack->index = i;
 		if (i <= median)
-			stack->is_above_medan = 1;
+			stack->is_above_median = 1;
 		else
-			stack->is_above_medan = 0;
+			stack->is_above_median = 0;
 		stack = stack->next;
 		i++;
 	}
@@ -79,8 +79,8 @@ void assign_index(t_stack *stack)
 
 void fix_stack(t_stack **a)
 {
-	t_stack = *min_node;
-	int lent;
+	t_stack *min_node;
+	int len;
 	
 	min_node = get_min_node(*a);
 	len = ft_lstsize_ps(*a);
@@ -90,5 +90,56 @@ void fix_stack(t_stack **a)
 			ra(a);
 		else
 			rra(a);
+	}
+}
+
+void find_target_node(t_stack *a, t_stack *b)
+{
+	t_stack *ptr_a;
+	int best_value;
+	t_stack *target;
+	
+	target = NULL;
+	while (b)
+	{
+		best_value = INT_MAX;
+		ptr_a = a;
+		while(ptr_a)
+		{
+			if (ptr_a->content > b->content && ptr_a->content < best_value)
+			{
+				best_value = ptr_a->content;
+				target = ptr_a;
+			}
+			ptr_a = ptr_a->next;
+		}
+		if (target == NULL)
+		{
+			target = get_min_node(a);
+		}
+		b->target_node = target;
+		b = b->next;
+	}
+	
+}
+
+void calculate_cost(t_stack *a, t_stack *b)
+{
+	int len_a;  
+	int len_b;
+	
+	len_a = ft_lstsize_ps(a);
+	len_b = ft_lstsize_ps(b);
+	
+	while(b)
+	{
+		if (b->is_above_median)
+			b->cost_b = b->index;
+		else
+			b->cost_b = (len_b - b->index) * (-1);
+		if (b->target_node->is_above_median)
+			b->cost_a = b->target_node->index;
+		else
+			b->cost_a = (len_a - b->target_node->index) * (-1);
 	}
 }

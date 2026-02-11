@@ -6,15 +6,26 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:54:24 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/10 17:58:11 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:32:16 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Bitch handle errors:
-// fix returns to void function and handle errors inside parsing, since we cant pass the splitted args into main (splitted_args is a static variable
-// that will destroys after functions execute).
+static void	sort_handle(t_stack **a, t_stack **b)
+{
+	int	size;
+
+	size = ft_lstsize_ps(*a);
+
+	if (size == 2)
+		sa(*a);
+	else if (size == 3)
+		sort_three(a);
+	else
+		sort(a, b);
+	return ;
+}
 
 int main(int argc, char **argv)
 {
@@ -25,5 +36,11 @@ int main(int argc, char **argv)
 	
 	a = NULL;
 	b = NULL;
-	if (parsing(argc, argv, &a));
+	parsing(argc, argv, &a);
+	if (!is_sorted(a))
+		sort_handle(&a, &b);
+	free_stack(&a);
+	if (b)
+		free_stack(&a);
+	return (0);
 }

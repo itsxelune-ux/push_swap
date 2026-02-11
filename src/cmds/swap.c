@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:41:04 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/10 15:58:12 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:25:27 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void ss(t_stack *a, t_stack *b)
 {
 	swap(a);
 	swap(b);
-	ft_rpintf("ss\n");
+	ft_printf("ss\n");
 }
