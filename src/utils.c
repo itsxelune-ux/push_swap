@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:55:03 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/11 20:31:00 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:09:26 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_atol_safe(const char *str, long *result)
 
 int is_sorted(t_stack *a)
 {
-	while(a)
+	while(a->next)
 	{
 		if ((a)->content > (a)->next->content)
 			return (0);

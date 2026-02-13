@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 18:01:09 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/11 20:14:37 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:38:00 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ void find_target_node(t_stack *a, t_stack *b)
 	int best_value;
 	t_stack *target;
 	
-	target = NULL;
 	while (b)
 	{
+		target = NULL;
 		best_value = INT_MAX;
 		ptr_a = a;
 		while(ptr_a)
@@ -134,12 +134,17 @@ void calculate_cost(t_stack *a, t_stack *b)
 	while(b)
 	{
 		if (b->is_above_median)
+		{
 			b->cost_b = b->index;
+		}
 		else
+		{
 			b->cost_b = (len_b - b->index) * (-1);
+		}
 		if (b->target_node->is_above_median)
 			b->cost_a = b->target_node->index;
 		else
 			b->cost_a = (len_a - b->target_node->index) * (-1);
+		b = b->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:07:25 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/11 20:28:43 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:34:00 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sort_b(t_stack **a, t_stack **b)
 {
-	while (b)
+	while (*b)
 	{
 		assign_index(*a);
 		assign_index(*b);

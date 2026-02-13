@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:07:17 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/11 20:25:52 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:35:23 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static t_stack *get_cheapest_node(t_stack *b)
 	cheapest_cost = INT_MAX;
 	while(b_ptr)
 	{
-		if ((abs_v(b->cost_b) + abs_v(b->cost_a)) < cheapest_cost)
+		if ((abs_v(b_ptr->cost_b) + abs_v(b_ptr->cost_a)) < cheapest_cost)
 		{
 			target = b_ptr;
-			cheapest_cost = (abs_v(b->cost_b) + abs_v(b->cost_a));
+			cheapest_cost = (abs_v(b_ptr->cost_b) + abs_v(b_ptr->cost_a));
 		}
 		b_ptr = b_ptr->next;
 	}

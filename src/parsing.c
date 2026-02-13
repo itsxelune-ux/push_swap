@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 17:10:10 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/11 20:32:05 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:08:40 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 void	handle_error(char **args, t_stack **a, int should_free_split)
 {
 	ft_putstr_fd("Error\n", 2);
-	if (should_free_split && a)
+	if (should_free_split)
 	{
 		free_split(args);
-		free_stack(a);
 	}
-	if (a || *a)
+	if (a && *a)
 	{
 		free_stack(a);	
 	}
@@ -68,22 +67,20 @@ int validate_args(char **args, t_stack **a)
 void parsing(int argc, char **argv, t_stack **a)
 {
 	char **splitted_args;
+	int	should_free;
 
+	should_free = 0;
 	if (2 == argc)
 	{
 		splitted_args = ft_split(argv[1], ' ');
-		if (!splitted_args)
+		if (!splitted_args[0] || !splitted_args)
 			handle_error(NULL, a, 0);
-		if (!splitted_args[0] || !splitted_args[0][0])
-		{
-			free_split(splitted_args);
-			handle_error(NULL, a, 0);
-		}
+		should_free = 1;
 	}
 	else
 		splitted_args = argv + 1;
 	if (!validate_args(splitted_args, a))
-		handle_error(NULL, a, 0);
-	if (2 == argc)
+		handle_error(splitted_args, a, should_free);
+	if (should_free)
 		free_split(splitted_args);
 }
