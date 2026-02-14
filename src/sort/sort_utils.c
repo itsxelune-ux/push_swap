@@ -6,25 +6,23 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 18:01:09 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/13 16:38:00 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:27:05 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
-
-//stack size
-//Why?
+// stack size
+// Why?
 // decide rotate vs reverse rotate
 // cost calculation
 // small sorts
 
 // Check if sorted
 
-	
 // Find min / max
 
-//asign index
+// asign index
 
 // Get position in stack
 
@@ -32,18 +30,16 @@
 
 // Cost helpers (sometimes here, sometimes separate)
 
-
-t_stack *get_min_node(t_stack *stack)
+t_stack	*get_min_node(t_stack *stack)
 {
-	int min_value;
-	t_stack *min_node;
+	int		min_value;
+	t_stack	*min_node;
 
 	min_value = INT_MAX;
 	min_node = NULL;
-	
 	if (!stack)
-		return NULL;
-	while(stack)
+		return (NULL);
+	while (stack)
 	{
 		if ((stack)->content < min_value)
 		{
@@ -52,19 +48,19 @@ t_stack *get_min_node(t_stack *stack)
 		}
 		stack = stack->next;
 	}
-	return(min_node);
+	return (min_node);
 }
 
-void assign_index(t_stack *stack)
+void	assign_index(t_stack *stack)
 {
-	int i;
-	int median;
+	int	i;
+	int	median;
 
 	i = 0;
-	if(!stack)
+	if (!stack)
 		return ;
 	median = ft_lstsize_ps(stack) / 2;
-	while(stack)
+	while (stack)
 	{
 		stack->index = i;
 		if (i <= median)
@@ -74,17 +70,16 @@ void assign_index(t_stack *stack)
 		stack = stack->next;
 		i++;
 	}
-	
 }
 
-void fix_stack(t_stack **a)
+void	fix_stack(t_stack **a)
 {
-	t_stack *min_node;
-	int len;
-	
+	t_stack	*min_node;
+	int		len;
+
 	min_node = get_min_node(*a);
 	len = ft_lstsize_ps(*a);
-	while((*a)->content != min_node->content)
+	while ((*a)->content != min_node->content)
 	{
 		if (min_node->index <= len / 2)
 			ra(a);
@@ -93,18 +88,18 @@ void fix_stack(t_stack **a)
 	}
 }
 
-void find_target_node(t_stack *a, t_stack *b)
+void	find_target_node(t_stack *a, t_stack *b)
 {
-	t_stack *ptr_a;
-	int best_value;
-	t_stack *target;
-	
+	t_stack	*ptr_a;
+	int		best_value;
+	t_stack	*target;
+
 	while (b)
 	{
 		target = NULL;
 		best_value = INT_MAX;
 		ptr_a = a;
-		while(ptr_a)
+		while (ptr_a)
 		{
 			if (ptr_a->content > b->content && ptr_a->content < best_value)
 			{
@@ -120,18 +115,16 @@ void find_target_node(t_stack *a, t_stack *b)
 		b->target_node = target;
 		b = b->next;
 	}
-	
 }
 
-void calculate_cost(t_stack *a, t_stack *b)
+void	calculate_cost(t_stack *a, t_stack *b)
 {
-	int len_a;  
-	int len_b;
-	
+	int	len_a;
+	int	len_b;
+
 	len_a = ft_lstsize_ps(a);
 	len_b = ft_lstsize_ps(b);
-	
-	while(b)
+	while (b)
 	{
 		if (b->is_above_median)
 		{

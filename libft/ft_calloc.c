@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 18:00:50 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/14 18:29:16 by omitrovs         ###   ########.fr       */
+/*   Created: 2025/11/14 17:21:04 by ptison            #+#    #+#             */
+/*   Updated: 2025/11/16 17:20:22 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdint.h>
+#include "libft.h"
 
-static void	push(t_stack **src, t_stack **dest)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_stack	*temp;
+	void	*ptr;
+	size_t	total;
 
-	if (!src || !*src)
-		return ;
-	temp = *src;
-	*src = (*src)->next;
-	temp->next = *dest;
-	*dest = temp;
-}
-
-void	pa(t_stack **a, t_stack **b)
-{
-	push(b, a);
-	ft_printf("pa\n");
-}
-
-void	pb(t_stack **a, t_stack **b)
-{
-	push(a, b);
-	ft_printf("pb\n");
+	if (count != 0 && size != 0)
+	{
+		if (count > SIZE_MAX / size)
+			return (NULL);
+	}
+	total = count * size;
+	ptr = malloc(total);
+	if (!ptr)
+		return (NULL);
+	ft_bzero (ptr, total);
+	return (ptr);
 }

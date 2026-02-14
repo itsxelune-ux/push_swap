@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 18:00:50 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/14 18:29:16 by omitrovs         ###   ########.fr       */
+/*   Created: 2025/11/12 14:46:29 by ptison            #+#    #+#             */
+/*   Updated: 2025/11/16 17:48:57 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-static void	push(t_stack **src, t_stack **dest)
+void	ft_bzero(void *s, size_t n)
 {
-	t_stack	*temp;
-
-	if (!src || !*src)
-		return ;
-	temp = *src;
-	*src = (*src)->next;
-	temp->next = *dest;
-	*dest = temp;
+	ft_memset(s, 0, n);
 }
-
-void	pa(t_stack **a, t_stack **b)
+/*
+int	main(void)
 {
-	push(b, a);
-	ft_printf("pa\n");
+	int	i = 0;
+	int	*s = NULL;
+	int	n = 5;
+	ft_bzero(s, 3);
+	while (i < n)
+	{
+		printf("%i ", s[i]);
+		i++;
+	}
 }
-
-void	pb(t_stack **a, t_stack **b)
-{
-	push(a, b);
-	ft_printf("pb\n");
-}
+*/

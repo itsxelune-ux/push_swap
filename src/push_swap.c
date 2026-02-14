@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:54:24 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/13 17:07:02 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:29:32 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	sort_handle(t_stack **a, t_stack **b)
 	int	size;
 
 	size = ft_lstsize_ps(*a);
-
 	if (size == 2)
 		sa(*a);
 	else if (size == 3)
@@ -38,13 +37,13 @@ static void	sort_handle(t_stack **a, t_stack **b)
 // 	}
 // }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
+	t_stack	*a;
+	t_stack	*b;
+
 	if (argc < 2)
 		return (-1);
-	t_stack *a;
-	t_stack *b;
-	
 	a = NULL;
 	b = NULL;
 	parsing(argc, argv, &a);

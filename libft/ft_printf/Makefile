@@ -1,37 +1,20 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: vlnikola <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/15 14:52:58 by vlnikola          #+#    #+#              #
-#    Updated: 2025/11/15 14:52:59 by vlnikola         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libftprintf.a
-
-SOURCES = ft_printf.c utils_1.c utils_2.c
-
-OBJECTS = $(SOURCES:.c=.o)
-
-CFLAGS = -Wall -Wextra -Werror
-
+SRC = ft_printf.c ft_helper.c
+OBJ = $(SRC:.c=.o)
 CC = cc
-
-BONUS_OBJECTS = $(BONUS:.c=.o)
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	ar rcs $(NAME) $(OBJECTS)
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJ)
+
 fclean: clean
 	rm -f $(NAME)
 

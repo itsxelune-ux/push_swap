@@ -6,13 +6,26 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:07:25 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/13 16:34:00 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:53:29 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
-void	sort_b(t_stack **a, t_stack **b)
+static int	get_pivot(t_stack *a, int size)
+{
+	int	sum;
+
+	sum = 0;
+	while (a)
+	{
+		sum += a->content;
+		a = a->next;
+	}
+	return (sum / size);
+}
+
+static void	sort_b(t_stack **a, t_stack **b)
 {
 	while (*b)
 	{
@@ -24,15 +37,21 @@ void	sort_b(t_stack **a, t_stack **b)
 	}
 }
 
-void sort(t_stack **a, t_stack **b)
+void	sort(t_stack **a, t_stack **b)
 {
-	int size;
-	
+	int	size;
+	int	size_init;
+	int	pivot;
+
 	size = ft_lstsize_ps(*a);
-	
+	size_init = size;
+	pivot = get_pivot(*a, size);
 	while (size > 3)
 	{
 		pb(a, b);
+		if ((*b)->content < pivot && size_init != 5)
+			if ((*b)->next)
+				rb(b);
 		size--;
 	}
 	sort_three(a);

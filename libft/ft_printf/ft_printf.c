@@ -3,63 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlnikola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/15 14:59:04 by vlnikola          #+#    #+#             */
-/*   Updated: 2025/11/15 14:59:06 by vlnikola         ###   ########.fr       */
+/*   Created: 2025/11/21 16:01:43 by omitrovs          #+#    #+#             */
+/*   Updated: 2025/11/29 21:37:58 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdarg.h>
 #include "ft_printf.h"
 
-static size_t	conv_spec_handle(const char c, va_list arguments)
+int	print_hex_ul(unsigned long n)
 {
-	size_t	len;
+	char	*base;
+	int		count;
 
-	len = 0;
+	base = "0123456789abcdef";
+	count = 0;
+	if (n >= 16)
+		count += print_hex_ul(n / 16);
+	count += print_char(base[n % 16]);
+	return (count);
+}
+
+int	print_ptr(void *p)
+{
+	unsigned long	addr;
+	int				count;
+
+	if (p == NULL)
+		return (write(1, "(nil)", 5));
+	addr = (unsigned long)p;
+	write(1, "0x", 2);
+	count = 2;
+	count += print_hex_ul(addr);
+	return (count);
+}
+
+static int	print_specifier(va_list ap, char c)
+{
+	if (c == 'c')
+		return (print_char(va_arg(ap, int)));
+	if (c == 's')
+		return (print_str(va_arg(ap, char *)));
+	if (c == 'd' || c == 'i')
+		return (print_nbr(va_arg(ap, int)));
+	if (c == 'u')
+		return (print_unbr(va_arg(ap, unsigned int)));
+	if (c == 'x')
+		return (print_hex(va_arg(ap, unsigned int), 0));
+	if (c == 'X')
+		return (print_hex(va_arg(ap, unsigned int), 1));
+	if (c == 'p')
+		return (print_ptr(va_arg(ap, void *)));
 	if (c == '%')
-		len = ft_putchar_printf('%');
-	else if (c == 'c')
-		len = ft_putchar_printf(va_arg(arguments, int));
-	else if (c == 's')
-		len = ft_putstr_printf(va_arg(arguments, char *));
-	else if (c == 'd' || c == 'i')
-		ft_putnbr_printf(va_arg(arguments, int), &len);
-	else if (c == 'u')
-		ft_putnbr_uns_printf(va_arg(arguments, unsigned int), &len);
-	else if (c == 'x')
-		ft_putnbr_base_printf((size_t)va_arg(arguments, unsigned int),
-			"0123456789abcdef", &len);
-	else if (c == 'X')
-		ft_putnbr_base_printf((size_t)va_arg(arguments, unsigned int),
-			"0123456789ABCDEF", &len);
-	else if (c == 'p')
-		ft_putptr(va_arg(arguments, void *), &len);
-	return (len);
+		return (print_char('%'));
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	arguments;
-	size_t	len;
+	va_list	ap;
+	int		i;
+	int		count;
 
-	len = 0;
-	if (!format)
-		return (-1);
-	va_start(arguments, format);
-	while (*format)
+	va_start(ap, format);
+	i = 0;
+	count = 0;
+	while (format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			if (*format == 0)
+			i++;
+			if (format[i])
+				count += print_specifier(ap, format[i]);
+			else
 				break ;
-			len += conv_spec_handle(*format, arguments);
 		}
 		else
-			len += (size_t)ft_putchar_printf(*format);
-		format++;
+			count += print_char(format[i]);
+		i++;
 	}
-	va_end(arguments);
-	return (len);
+	va_end(ap);
+	return (count);
 }

@@ -6,13 +6,13 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:55:03 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/13 17:09:26 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:37:51 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atol_safe(const char *str, long *result)
+int	ft_atol(const char *str, long *result)
 {
 	int		sign;
 	long	num;
@@ -39,9 +39,9 @@ int	ft_atol_safe(const char *str, long *result)
 	return (1);
 }
 
-int is_sorted(t_stack *a)
+int	is_sorted(t_stack *a)
 {
-	while(a->next)
+	while (a->next)
 	{
 		if ((a)->content > (a)->next->content)
 			return (0);

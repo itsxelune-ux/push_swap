@@ -1,37 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_group.c                                      :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlnikola <vlnikola@student.42prague.com>   +#+  +:+       +#+        */
+/*   By: ptison <ptison@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/25 22:24:56 by vlnikola          #+#    #+#             */
-/*   Updated: 2025/10/25 22:24:58 by vlnikola         ###   ########.fr       */
+/*   Created: 2025/11/12 13:43:10 by ptison            #+#    #+#             */
+/*   Updated: 2025/11/12 13:45:31 by ptison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
-
-int	ft_isalnum(int c)
-{
-	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z'));
-}
-
-int	ft_isalpha(int c)
-{
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
-}
-
-int	ft_isascii(int c)
-{
-	return (c >= 0 && c <= 127);
-}
-
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
 
 int	ft_isprint(int c)
 {

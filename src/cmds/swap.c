@@ -6,16 +6,16 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:41:04 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/11 20:25:27 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:29:00 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
-void swap(t_stack *stack)
+void	swap(t_stack *stack)
 {
-	int temp;
-	
+	int	temp;
+
 	if (!stack || !stack->next)
 		return ;
 	temp = stack->content;
@@ -23,23 +23,22 @@ void swap(t_stack *stack)
 	stack->next->content = temp;
 }
 
-//sa
-//sb
+// sa
+// sb
 
-
-void sa(t_stack *a)
+void	sa(t_stack *a)
 {
 	swap(a);
 	ft_printf("sa\n");
 }
 
-void sb(t_stack *b)
+void	sb(t_stack *b)
 {
 	swap(b);
-	ft_printf("sb\n");	
+	ft_printf("sb\n");
 }
 
-void ss(t_stack *a, t_stack *b)
+void	ss(t_stack *a, t_stack *b)
 {
 	swap(a);
 	swap(b);

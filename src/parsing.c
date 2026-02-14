@@ -6,11 +6,11 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 17:10:10 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/13 17:08:40 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:37:59 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
 void	handle_error(char **args, t_stack **a, int should_free_split)
 {
@@ -21,7 +21,7 @@ void	handle_error(char **args, t_stack **a, int should_free_split)
 	}
 	if (a && *a)
 	{
-		free_stack(a);	
+		free_stack(a);
 	}
 	exit(-1);
 }
@@ -38,7 +38,7 @@ void	free_split(char **args)
 	free(args);
 }
 
-int is_duplicate(t_stack *a, int num)
+int	is_duplicate(t_stack *a, int num)
 {
 	while (a)
 	{
@@ -49,25 +49,26 @@ int is_duplicate(t_stack *a, int num)
 	return (0);
 }
 
-int validate_args(char **args, t_stack **a)
+int	validate_args(char **args, t_stack **a)
 {
-	long number;
+	long	number;
+
 	while (*args)
 	{
-		if (!ft_atol_safe(*args, &number))
+		if (!ft_atol(*args, &number))
 			return (0);
 		if (is_duplicate(*a, number))
 			return (0);
 		ft_lstadd_back_ps(a, ft_lstnew_ps(number));
-		args++;	
+		args++;
 	}
 	return (1);
 }
 
-void parsing(int argc, char **argv, t_stack **a)
+void	parsing(int argc, char **argv, t_stack **a)
 {
-	char **splitted_args;
-	int	should_free;
+	char	**splitted_args;
+	int		should_free;
 
 	should_free = 0;
 	if (2 == argc)

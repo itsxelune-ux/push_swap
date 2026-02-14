@@ -3,57 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vlnikola <vlnikola@student.42prague.com    +#+  +:+       +#+         #
+#    By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/26 22:52:41 by vlnikola          #+#    #+#              #
-#    Updated: 2025/11/13 01:50:32 by vlnikola         ###   ########.fr        #
+#    Created: 2025/11/11 15:07:06 by ptison            #+#    #+#              #
+#    Updated: 2026/02/14 18:36:13 by omitrovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-
-SOURCES = ft_is_group.c \
-	ft_print_group.c \
-	ft_atoi_itoa.c \
-	ft_fniteri.c \
-	ft_mallocated_1.c \
-	ft_mallocated_2.c \
-	ft_strings_1.c \
-	ft_strings_2.c \
-	ft_mem_group_1.c \
-	ft_mem_group_2.c \
-	ft_to_upper_lower.c \
-	ft_split.c \
-
-OBJECTS = $(SOURCES:.c=.o)
-
-CFLAGS = -Wall -Wextra -Werror
-
 CC = cc
-
-BONUS = ft_1_bonus.c \
-	ft_2_bonus.c \
-
-BONUS_OBJECTS = $(BONUS:.c=.o)
-
+NAME = libft.a
+CFLAGS = -Wall -Wextra -Werror
+SRC = ft_isalpha.c ft_isdigit.c ft_atoi.c ft_bzero.c ft_isascii.c ft_calloc.c ft_isalnum.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
+OBJ = $(SRC:.c=.o)
 PRINTF_PATH = ft_printf/
-
 PRINTF_NAME = $(PRINTF_PATH)libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-
+$(NAME): $(OBJ)
 	$(MAKE) -C $(PRINTF_PATH)
 	cp $(PRINTF_NAME) $(NAME)
-	ar rcs $(NAME) $(OBJECTS)
-
+	ar rcs $(NAME) $(OBJ)
+	
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS)
-	rm -f $(BONUS_OBJECTS)
+	rm -f $(OBJ)
 	$(MAKE) -C $(PRINTF_PATH) clean
 
 fclean: clean
@@ -62,10 +38,5 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJECTS) $(BONUS_OBJECTS)
-	$(MAKE) -C $(PRINTF_PATH)
-	cp $(PRINTF_NAME) $(NAME)
-	ar rcs $(NAME) $(OBJECTS) $(BONUS_OBJECTS)
+.PHONY: all clean fclean re
 
-
-.PHONY: all clean fclean re bonus

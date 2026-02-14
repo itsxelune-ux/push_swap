@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/23 02:34:49 by vlnikola          #+#    #+#              #
-#    Updated: 2026/02/13 17:08:45 by omitrovs         ###   ########.fr        #
+#    Created: 2026/02/14 18:30:53 by omitrovs          #+#    #+#              #
+#    Updated: 2026/02/14 18:33:49 by omitrovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ INCLUDES    = -I. -I$(LIBFT_PATH)
 all: $(LIBFT_NAME) $(NAME)
 
 $(LIBFT_NAME):
-	@$(MAKE) bonus -C $(LIBFT_PATH)
+	@$(MAKE) -C $(LIBFT_PATH)
 
 $(NAME): $(OBJS) $(LIBFT_NAME)
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
