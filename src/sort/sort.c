@@ -6,7 +6,7 @@
 /*   By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:07:25 by omitrovs          #+#    #+#             */
-/*   Updated: 2026/02/14 18:53:29 by omitrovs         ###   ########.fr       */
+/*   Updated: 2026/02/17 15:16:39 by omitrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	sort(t_stack **a, t_stack **b)
 	}
 	sort_three(a);
 	sort_b(a, b);
+	assign_index(*a);
 	fix_stack(a);
 }
