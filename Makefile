@@ -6,33 +6,34 @@
 #    By: omitrovs <omitrovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/14 18:30:53 by omitrovs          #+#    #+#              #
-#    Updated: 2026/02/14 18:33:49 by omitrovs         ###   ########.fr        #
+#    Updated: 2026/02/17 17:34:02 by omitrovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = push_swap
-CC          = cc
-CFLAGS      = -Wall -Wextra -Werror
-LIBFT_PATH  = ./libft
-LIBFT_NAME  = $(LIBFT_PATH)/libft.a
+NAME       = push_swap
+CC         = cc
+CFLAGS     = -Wall -Wextra -Werror
 
-SRCS        = src/cmds/push.c \
-			src/cmds/reverse_rotate.c \
-			src/cmds/rotate.c \
-			src/cmds/swap.c \
-			src/sort/sort_move_node.c \
-			src/sort/sort_rotations.c \
-			src/sort/sort_small.c \
-			src/sort/sort_utils.c \
-			src/sort/sort.c \
-			src/list.c \
-			src/parsing.c \
-			src/push_swap.c \
-			src/utils.c
+LIBFT_PATH = ./src/libft
+LIBFT_NAME = $(LIBFT_PATH)/libft.a
 
-OBJS        = $(SRCS:.c=.o)
+SRCS       = src/operations/push.c \
+             src/operations/reverse_rotate.c \
+             src/operations/rotate.c \
+             src/operations/swap.c \
+             src/algorithm/sort_move_node.c \
+             src/algorithm/sort_rotations.c \
+             src/algorithm/sort_small.c \
+             src/algorithm/sort_utils.c \
+             src/algorithm/sort.c \
+             src/stack/list.c \
+             src/parsing/parsing.c \
+             src/utils/utils.c \
+             src/push_swap.c
 
-INCLUDES    = -I. -I$(LIBFT_PATH)
+OBJS       = $(SRCS:src/%.c=objects/%.o)
+
+INCLUDES   = -Iinclude -I$(LIBFT_PATH)
 
 all: $(LIBFT_NAME) $(NAME)
 
@@ -42,11 +43,12 @@ $(LIBFT_NAME):
 $(NAME): $(OBJS) $(LIBFT_NAME)
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
 
-%.o: %.c
+objects/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf objects
 	@$(MAKE) -C $(LIBFT_PATH) clean
 
 fclean: clean
